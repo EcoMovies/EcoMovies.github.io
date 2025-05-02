@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASISTENCIA CINE</title>
+    <title>ASISTENCIA ECOMOVIES</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap'); /* Fuente moderna y legible */
         body {
@@ -102,8 +102,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>ASISTENCIA CINE</h1>
-        <form id="registroForm" action="https://script.google.com/macros/s/AKfycbytAkorfrZfCkn7nwAGadzrYAtz5is3FmGFWruK-ZXgmrC6q7_XG2FVl3tAExTzbJwo/exec" method="POST">
+        <h1>ASISTENCIA ECOMOVIES</h1>
+        <form id="registroForm" action="https://script.google.com/macros/s/AKfycbyJ7iAZ7KLkU5i3Fa0UxxXuXij-i45p9r6jsiMzp1_LdTfbhydHe-VsH4kXFyEe6f9IOg/exec" method="POST">
             <div class="form-group">
                 <label for="nombre_completo">Nombre Completo:</label>
                 <input type="text" id="nombre_completo" name="nombre_completo" required>
@@ -132,61 +132,11 @@
     <script>
         const registroForm = document.getElementById('registroForm');
         const mensajeDiv = document.getElementById('mensaje');
-        const codigosUnicos = [
-            "4X9B2", "T7Z1R", "W5Q8Y", "G2M6J", "P3S9D", "V8C4N", "L1F7H", "B6K3T", "R9W2Z", "Y4G7Q",
-            "J1P5M", "N8V2S", "H3L9C", "T6B4F", "Z9R1W", "Q5Y8G", "M2J6P", "S3D9V", "C4N7L", "F7H1B",
-            "W2Z9R", "Y8Q5T", "J6M2G", "N9S3P", "H1C4V", "B4F7L", "R1W9Z", "Q7G5Y", "M5P2J", "S2D8N",
-            "C9L3H", "F3B6T", "Z8R4W", "G4Q1Y", "P1M7J", "V7S5N", "L2C9H", "B9F3T", "R5Z7W", "Y3Q1G",
-            "J7M4P", "N4S8V", "H8C2L", "T2F9B", "Z5R3W", "Q9Y6G", "M6J1P", "S1D7V", "C7N5L", "F5H2B",
-            "W3Z6R", "Y6Q9T", "J9M3G", "N3S6P", "H6C1V", "B1F8L", "R8W4Z", "Q4Y2G", "M2J9P", "S7D1V",
-            "C1N6L", "F9H3B", "Z3R7W", "G7Q5Y", "P5M2J", "V2S9N", "L9C3H", "B3F6T", "R6Z1W", "Y1Q8G",
-            "J8M5P", "N5S2V", "H2C7L", "T7F4B", "Z4R9W", "Q8Y3G", "M3J6P", "S6D1V", "C5N8L", "F1H7B",
-            "W9Z2R", "Y2Q5T", "J5M8G", "N8S3P", "H3C6V", "B6F1L", "R1W7Z", "Q7Y4G", "M4J9P", "S9D2V",
-            "C2N5L", "F5H8B", "Z8R3W", "G3Q6Y", "P6M1J", "V1S7N", "L7C4H", "B4F9T", "R9Z5W", "Y5Q2G",
-            "J2M8P", "N8S1V", "H1C5L", "T5F3B", "Z3R6W", "Q6Y9G", "M9J4P", "S4D2V", "C8N1L", "F2H7B",
-            "W7Z3R", "Y3Q6T", "J6M9G", "N9S4P", "H4C2V", "B2F7L", "R7W1Z", "Q1Y5G", "M5J8P", "S8D3V",
-            "C3N6L", "F6H2B", "Z2R7W", "G7Q4Y", "P4M9J", "V9S5N", "L5C2H", "B8F1T", "R1Z6W", "Y6Q3G",
-            "J3M7P", "N7S9V", "H9C4L", "T4F2B", "Z2R5W", "Q5Y7G", "M7J1P", "S1D6V", "C6N9L", "F9H4B",
-            "W4Z7R", "Y7Q2T", "J2M5G", "N5S8P", "H8C3V", "B3F6L", "R6W9Z", "Q9Y1G", "M1J7P", "S7D4V",
-            "C4N2L", "F2H5B", "Z5R8W", "G8Q3Y", "P3M6J", "V6S1N", "L1C7H", "B7F4T", "R4Z9W", "Y9Q5G",
-            "J5M2P", "N2S8V", "H8C1L", "T1F7B", "Z7R4W", "Q4Y9G", "M9J3P", "S3D6V", "C6N1L", "F1H8B",
-            "W8Z5R", "Y5Q2T", "J2M7G", "N7S4P", "H4C9V", "B9F2L", "R2W6Z", "Q6Y1G", "M1J8P", "S8D5V",
-            "C5N3L", "F3H7B", "Z7R2W", "G2Q6Y", "P6M1J", "V1S8N", "L8C4H", "B4F9T", "R9Z3W", "Y3Q7G",
-            "J7M1P", "N1S6V", "H6C8L", "T8F2B", "Z2R5W", "Q5Y9G", "M9J4P", "S4D7V", "C7N2L", "F2H6B",
-            "W6Z1R", "Y1Q8T", "J8M3G", "N3S7P", "H7C5V", "B5F9L", "R9W4Z", "Q4Y2G", "M2J7P", "S7D1V",
-            "C1N8L", "F8H3B", "Z3R6W", "G6Q9Y", "P9M4J", "V4S2N", "L2C7H", "B7F5T", "R5Z8W", "Y8Q3G",
-            "J3M6P", "N6S1V", "H1C9L", "T9F4B", "Z4R7W", "Q7Y2G", "M2J5P", "S5D9V", "C9N3L", "F3H6B",
-            "W3Z8R", "Y8Q1T", "J1M6G", "N6S9P", "H9C4V", "B4F7L", "R7W2Z", "Q2Y5G", "M5J8P", "S8D3V",
-            "C3N6L", "F6H1B", "Z1R7W", "G7Q4Y", "P4M9J", "V9S2N", "L2C5H", "B5F8T", "R8Z3W", "Y3Q6G",
-            "J6M1P", "N1S7V", "H7C2L", "T2F5B", "Z5R9W", "Q9Y4G", "M4J7P", "S7D2V", "C2N5L", "F5H8B",
-            "W5Z9R", "Y9Q3T", "J3M6G", "N6S1P", "H1C8V", "B8F4L", "R4W7Z", "Q7Y2G", "M2J5P", "S5D9V",
-            "C9N3L", "F3H6B", "Z6R1W", "G1Q8Y", "P8M5J", "V5S2N", "L2C7H", "B7F4T", "R4Z9W", "Y9Q5G",
-            "J5M2P", "N2S8V", "H8C1L", "T1F7B", "Z7R4W", "Q4Y9G", "M9J3P", "S3D6V", "C6N1L", "F1H8B",
-            "W1Z5R", "Y5Q2T", "J2M7G", "N7S4P", "H4C9V", "B9F2L", "R2W6Z", "Q6Y1G", "M1J8P", "S8D5V",
-            "PRUEBA1", "PRUEBA2"
-        ];
-        const codigosUsadosLocal = []; // Lista para códigos usados en la sesión actual
 
         registroForm.addEventListener('submit', function(event) {
             event.preventDefault();
+            mensajeDiv.textContent = 'Enviando datos y verificando código...';
 
-            const formData = new FormData(registroForm);
-            const codigoTicket = formData.get('codigo_ticket');
-
-            if (!codigosUnicos.includes(codigoTicket)) {
-                mensajeDiv.textContent = 'El código del ticket ingresado no es válido.';
-                mensajeDiv.className = 'error-message';
-                return;
-            }
-
-            if (codigosUsadosLocal.includes(codigoTicket)) {
-                mensajeDiv.textContent = 'Este código del ticket ya ha sido ingresado.';
-                mensajeDiv.className = 'error-message';
-                return;
-            }
-
-            codigosUsadosLocal.push(codigoTicket); // Marcar como usado en esta sesión
-            mensajeDiv.textContent = 'Enviando datos...';
             fetch(this.action, {
                 method: 'POST',
                 body: new FormData(this)
